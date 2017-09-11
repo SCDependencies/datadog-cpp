@@ -8,7 +8,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(include)
 
-set(libsrc src/trace_dogstatsd.cpp)
+set(libsrc src/trace_dogstatsd.cpp src/c_wrapper.cpp)
 
 ## we could do the following to compile just once, but I don't want
 # the static compiled with -PIC, so build twice.
