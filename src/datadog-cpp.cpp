@@ -19,7 +19,7 @@
 #include <mach-o/dyld.h>
 #endif
 
-#include "trace_dogstatsd.hpp"
+#include "datadog-cpp.hpp"
 
 namespace datadog {
 
