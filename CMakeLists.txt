@@ -14,7 +14,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(include)
 
-set(libsrc src/trace_dogstatsd.cpp src/c_wrapper.cpp)
+set(libsrc src/datadog-cpp.cpp src/datadog-c.cpp)
 
 ## we could do the following to compile just once, but I don't want
 # the static compiled with -PIC, so build twice.
@@ -27,7 +27,7 @@ set(libsrc src/trace_dogstatsd.cpp src/c_wrapper.cpp)
 add_library (datadogcpp-shared SHARED ${libsrc})
 
 install(TARGETS datadogcpp-shared DESTINATION lib)
-install(FILES  	include/c_wrapper.h include/trace_dogstatsd.hpp DESTINATION include)
+install(FILES include/datadog-c.h include/datadog-cpp.hpp DESTINATION include/datadog-cpp/)
 
 ## RPM packaging
 # CPACK

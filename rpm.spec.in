@@ -49,8 +49,9 @@ rm -rf build_tree
 /usr/local/include
 /usr/local/lib
 /usr/local/lib/libdatadogcpp-shared.so
-/usr/local/include/c_wrapper.h 
-/usr/local/include/trace_dogstatsd.hpp
+/usr/local/include/datadog-cpp/
+/usr/local/include/datadog-cpp/datadog-cpp.hpp
+/usr/local/include/datadog-cpp/datadog-c.h
 
 %changelog
 

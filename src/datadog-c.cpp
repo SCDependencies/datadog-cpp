@@ -2,8 +2,8 @@
 // Created by ogo on 9/8/17.
 //
 
-#include "c_wrapper.h"
-#include "trace_dogstatsd.hpp"
+#include "datadog-c.h"
+#include "datadog-cpp.hpp"
 
 static datadog::Dogstatsd& connection()
 {
