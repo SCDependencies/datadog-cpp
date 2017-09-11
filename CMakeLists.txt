@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.1.0)
+cmake_minimum_required (VERSION 2.8.0)
 project (datadogcpp)
 
 set(VERSION "1.0.1")
@@ -7,6 +7,7 @@ set (LIB_NAME "${PROJECT_NAME}")
 set (PKG_NAME "${PROJECT_NAME}")
 
 set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -22,8 +23,11 @@ set(libsrc src/trace_dogstatsd.cpp src/c_wrapper.cpp)
 # add_library (datadogcpp-static STATIC $<TARGET_OBJECTS:objlib>)
 # add_library (datadogcpp-shared SHARED $<TARGET_OBJECTS:objlib>)
 
-add_library (datadogcpp-static STATIC ${libsrc})
+#add_library (datadogcpp-static STATIC ${libsrc})
 add_library (datadogcpp-shared SHARED ${libsrc})
+
+install(TARGETS datadogcpp-shared DESTINATION lib)
+install(FILES  	include/c_wrapper.h include/trace_dogstatsd.hpp DESTINATION include)
 
 ## RPM packaging
 # CPACK
@@ -40,6 +44,18 @@ set(CPACK_PACKAGE_VENDOR ${VENDOR})
 set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CPACK_PACKAGE_RELEASE}.${CMAKE_SYSTEM_PROCESSOR}")
 set(CPACK_RPM_PACKAGE_REQUIRES "cmake")
+
+if(NOT DEFINED CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST)
+    set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST /usr /usr/local  /usr/local/lib /usr/local/include)
+    if(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION)
+      if(CPACK_RPM_PACKAGE_DEBUG)
+        message("CPackRPM:Debug: Adding ${CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION} to builtin omit list.")
+      endif()
+      list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST "${CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION}")
+    endif()
+endif()
+
+
 include(CPack)
 
 # source tar ball

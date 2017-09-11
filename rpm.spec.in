@@ -9,7 +9,7 @@ Source:         @CPACK_PACKAGE_NAME@-@CPACK_PACKAGE_VERSION@.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:  git
 BuildRequires:  gcc-c++
-BuildRequires:	cmake > 3.1
+BuildRequires:	cmake > 2.8
 BuildRequires:	make
 
 %description
@@ -39,11 +39,18 @@ cd ..
 rm -rf %{srcdirname}
 rm -rf build_tree
 
-%files
-%defattr(-,root,root,-)
-%{prefix}/include/@PROJECT_NAME@/*
-%{prefix}/@INSTALL_LIB_DIR@/*
-%{prefix}/bin/*
-%{prefix}/etc/*
+
+%files -f %{name}.lang
+%defattr(-, root, root)
+%doc AUTHORS COPYING INSTALL README NEWS
+
+/usr
+/usr/local
+/usr/local/include
+/usr/local/lib
+/usr/local/lib/libdatadogcpp-shared.so
+/usr/local/include/c_wrapper.h 
+/usr/local/include/trace_dogstatsd.hpp
 
 %changelog
+
