@@ -28,6 +28,7 @@ add_library (datadogcpp-shared SHARED ${libsrc})
 
 install(TARGETS datadogcpp-shared DESTINATION lib)
 install(FILES include/datadog-c.h include/datadog-cpp.hpp DESTINATION include/datadog-cpp/)
+install(FILES include/datadog-c.h include/datadog-cpp.hpp DESTINATION include/datadog-cpp/)
 
 ## RPM packaging
 # CPACK

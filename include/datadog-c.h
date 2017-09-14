@@ -2,17 +2,20 @@
 // Created by ogo on 9/8/17.
 //
 
-#ifndef COTURN_C_WRAPPER_H
-#define COTURN_C_WRAPPER_H
+#pragma once
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void test_d1();
+void* dd_allocate(char const*  host,
+                  unsigned int port,
+                  char const* tags_string);
+
+void    dd_free(void* connection);
+int     dd_gauge(void* connection, char const* name, int value);
+
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif //COTURN_C_WRAPPER_H
